@@ -2,11 +2,19 @@ import React from 'react';
 import GridBox from 'src/components/Grid/GridBox.tsx';
 import { generateArray } from 'src/helpers/genericHelper.ts';
 
-const GridRow: React.FC = () => (
+interface Props {
+  length: number;
+  letters: string;
+}
+
+const GridRow: React.FC<Props> = ({ length, letters }) => (
   <div className="flex">
     {
-        generateArray(8).map((value) => (
-          <GridBox key={value} />
+        generateArray(length).map((value) => (
+          <GridBox
+            key={value}
+            letter={letters.charAt(value) ? letters[value] : ''}
+          />
         ))
     }
   </div>
