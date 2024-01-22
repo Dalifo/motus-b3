@@ -1,23 +1,26 @@
 import React from 'react';
 import GridRow from 'src/components/Grid/GridRow.tsx';
 import { generateArray } from 'src/helpers/genericHelper.ts';
+import { NB_ATTEMPTS } from 'src/config/gameConfig.ts';
 
 interface Props {
   length: number;
   attempts: string[];
+  results: string[];
 }
 
 const Grid: React.FC<Props> = (props) => {
-  const { length, attempts } = props;
+  const { length, attempts, results } = props;
 
   return (
     <div className="flex justify-center items-center flex-col">
       {
-        generateArray(6).map((value) => (
+        generateArray(NB_ATTEMPTS).map((value) => (
           <GridRow
             key={value}
             length={length}
             letters={value in attempts ? attempts[value] : ''}
+            result={value in results ? results[value] : ''}
           />
         ))
       }

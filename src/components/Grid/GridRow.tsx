@@ -5,15 +5,17 @@ import { generateArray } from 'src/helpers/genericHelper.ts';
 interface Props {
   length: number;
   letters: string;
+  result: string;
 }
 
-const GridRow: React.FC<Props> = ({ length, letters }) => (
+const GridRow: React.FC<Props> = ({ length, letters, result }) => (
   <div className="flex">
     {
         generateArray(length).map((value) => (
           <GridBox
             key={value}
             letter={letters.charAt(value) ? letters[value] : ''}
+            state={result.charAt(value) ? result[value] : ''}
           />
         ))
     }
