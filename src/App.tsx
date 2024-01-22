@@ -8,6 +8,7 @@ import Message from 'src/components/Message.tsx';
 import { getRandomWord } from 'src/api/wordApi.ts';
 import { Message as MessageInterface, MessageType } from 'src/types/GameTypes.ts';
 import Spinner from 'src/components/Spinner.tsx';
+import { formatWord } from 'src/helpers/genericHelper.ts';
 
 const App = () => {
   const [word, setWord] = useState('');
@@ -22,9 +23,11 @@ const App = () => {
 
   const startGame = async () => {
     try {
+      setLoading(true);
       const randomWord = await getRandomWord();
-      setWord(randomWord[0].name.toUpperCase());
-      setAttempts([randomWord[0].name.toUpperCase().slice(0, 1)]);
+      const formattedWord = formatWord(randomWord[0].name);
+      setWord(formattedWord);
+      setAttempts([formattedWord.slice(0, 1)]);
     } catch (e: Error|any) {
       console.error(e);
       setMessage({
