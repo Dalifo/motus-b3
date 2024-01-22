@@ -7,12 +7,14 @@ import { getAttemptResult } from 'src/helpers/gameHelper.ts';
 import Message from 'src/components/Message.tsx';
 import { getRandomWord } from 'src/api/wordApi.ts';
 import { Message as MessageInterface, MessageType } from 'src/types/GameTypes.ts';
+import Spinner from 'src/components/Spinner.tsx';
 
 const App = () => {
   const [word, setWord] = useState('');
   const [attempts, setAttempts] = useState<string[]>([]);
   const [results, setResults] = useState<string[]>([]);
   const [message, setMessage] = useState<MessageInterface|null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     startGame();
@@ -29,6 +31,8 @@ const App = () => {
         type: MessageType.ERROR,
         content: e.message,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -86,6 +90,10 @@ const App = () => {
 
     setAttempts([...attempts, word.substring(0, 1)]);
   };
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <div className="container mx-auto flex flex-col items-center">
