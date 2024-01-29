@@ -2,14 +2,13 @@ import React from 'react';
 import KeyboardKey from 'src/components/Keyboard/KeyboardKey.tsx';
 
 interface Props {
-    line: string;
-  handleKeyPress: (character: string) => void
+  line: string;
 }
 
-const KeyboardRow: React.FC<Props> = ({ line, handleKeyPress }) => (
+const KeyboardRow: React.FC<Props> = ({ line }) => (
   <div className="flex">
     {line.split('').map((value) => (
-      <KeyboardKey key={value} character={value} handleKeyPress={handleKeyPress} />
+      <KeyboardKey key={value} character={value} />
     ))}
   </div>
 );

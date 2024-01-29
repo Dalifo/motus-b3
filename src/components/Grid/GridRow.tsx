@@ -1,25 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import GridBox from 'src/components/Grid/GridBox.tsx';
 import { generateArray } from 'src/helpers/genericHelper.ts';
+import { GameContext } from 'src/contexts/GameProvider.tsx';
 
 interface Props {
-  length: number;
   letters: string;
   result: string;
 }
 
-const GridRow: React.FC<Props> = ({ length, letters, result }) => (
-  <div className="flex">
-    {
-        generateArray(length).map((value) => (
+const GridRow: React.FC<Props> = ({ letters, result }) => {
+  const [state] = useContext(GameContext);
+
+  return (
+    <div className="flex">
+      {
+        generateArray(state.word.length).map((value) => (
           <GridBox
             key={value}
             letter={letters.charAt(value) ? letters[value] : ''}
             state={result.charAt(value) ? result[value] : ''}
           />
         ))
-    }
-  </div>
-);
+      }
+    </div>
+  );
+};
 
 export default GridRow;

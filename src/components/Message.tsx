@@ -1,9 +1,6 @@
-import React from 'react';
-import { MessageType, Message as MessageInterface } from 'src/types/GameTypes.ts';
-
-interface Props {
-    message: MessageInterface
-}
+import React, { useContext } from 'react';
+import { MessageType } from 'src/types/GameTypes.ts';
+import { GameContext } from 'src/contexts/GameProvider.tsx';
 
 const getBackground = (type: MessageType) => {
   switch (type) {
@@ -20,10 +17,16 @@ const getBackground = (type: MessageType) => {
   }
 };
 
-const Message: React.FC<Props> = ({ message }) => (
-  <div className={`${getBackground(message.type)} p-4 w-1/2 mx-auto text-center rounded-md mb-8`}>
-    {message.content}
-  </div>
-);
+const Message: React.FC = () => {
+  const [state] = useContext(GameContext);
+
+  if (!state.message) return null;
+
+  return (
+    <div className={`${getBackground(state.message.type)} p-4 w-1/2 mx-auto text-center rounded-md mb-8`}>
+      {state.message.content}
+    </div>
+  );
+};
 
 export default Message;

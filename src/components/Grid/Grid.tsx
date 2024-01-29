@@ -1,16 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import GridRow from 'src/components/Grid/GridRow.tsx';
 import { generateArray } from 'src/helpers/genericHelper.ts';
 import { NB_ATTEMPTS } from 'src/config/gameConfig.ts';
+import { GameContext } from 'src/contexts/GameProvider.tsx';
 
-interface Props {
-  length: number;
-  attempts: string[];
-  results: string[];
-}
-
-const Grid: React.FC<Props> = (props) => {
-  const { length, attempts, results } = props;
+const Grid: React.FC = () => {
+  const [state] = useContext(GameContext);
 
   return (
     <div className="flex justify-center items-center flex-col">
@@ -18,9 +13,8 @@ const Grid: React.FC<Props> = (props) => {
         generateArray(NB_ATTEMPTS).map((value) => (
           <GridRow
             key={value}
-            length={length}
-            letters={value in attempts ? attempts[value] : ''}
-            result={value in results ? results[value] : ''}
+            letters={value in state.attempts ? state.attempts[value] : ''}
+            result={value in state.results ? state.results[value] : ''}
           />
         ))
       }
