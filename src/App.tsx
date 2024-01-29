@@ -1,15 +1,9 @@
 import './App.css';
-import Game from 'src/components/Game.tsx';
-import GameProvider from 'src/contexts/GameProvider.tsx';
+import { RouterProvider } from 'react-router-dom';
+import router from 'src/config/router.tsx';
 
 const App = () => (
-  <div className="container mx-auto flex flex-col items-center">
-    <h1 className="text-center text-5xl mt-12 mb-8">Motus</h1>
-
-    <GameProvider>
-      <Game />
-    </GameProvider>
-  </div>
+  <RouterProvider router={router} />
 );
 
 export default App;

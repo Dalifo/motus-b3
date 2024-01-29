@@ -8,6 +8,8 @@ import Grid from 'src/components/Grid/Grid.tsx';
 import Keyboard from 'src/components/Keyboard/Keyboard.tsx';
 import { GameContext } from 'src/contexts/GameProvider.tsx';
 import { GameAction } from 'src/contexts/GameReducer.ts';
+import { ButtonColor } from 'src/types/ColorTypes.ts';
+import LinkButton from 'src/components/Layout/LinkButton.tsx';
 
 const Game: React.FC = () => {
   const [state, dispatch] = useContext(GameContext);
@@ -52,6 +54,12 @@ const Game: React.FC = () => {
       <Message />
       <Grid />
       <Keyboard />
+
+      <LinkButton
+        to="/"
+        label="Quitter"
+        color={ButtonColor.RED}
+      />
     </>
   );
 };
